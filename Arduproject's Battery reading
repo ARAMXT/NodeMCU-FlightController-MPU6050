@@ -1,0 +1,18 @@
+#define usCiclo 50000  // Ciclo de ejecución de software en microsegundos
+
+long  loop_timer;
+float tension_bateria, lectura_bat = 0.00;
+
+void setup() {
+  Serial.begin(115200);
+}
+
+void loop() {
+
+  while (micros() - loop_timer < usCiclo);  // Hacemos una lectura cada 'usCiclo' microsegundos
+  loop_timer = micros();
+
+  lectura_bat = analogRead(A6);
+  tension_bateria = 2.5 * (lectura_bat * 4.92  / 1023);
+  Serial.println(tension_bateria);
+}
